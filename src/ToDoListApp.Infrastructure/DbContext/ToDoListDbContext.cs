@@ -2,15 +2,13 @@
 using ToDoListApp.Infrastructure.DbModels;
 
 namespace ToDoListApp.Infrastructure.DbContext
-{    
-    public class ToDoListDbContext : System.Data.Entity.DbContext
+{
+  public class ToDoListDbContext : System.Data.Entity.DbContext
+  {
+    public ToDoListDbContext() : base("ToDoList")
     {
-        public ToDoListDbContext() : base("ToDoList")
-        {
-
-        }
-
-        public DbSet<TaskDbModel> Task { get; set; }
-
     }
+
+    public DbSet<TaskDbModel> Task { get; set; }
+  }
 }
