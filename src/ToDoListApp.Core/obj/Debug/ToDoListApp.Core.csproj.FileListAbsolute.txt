@@ -1,5 +1,0 @@
-c:\users\mateusz.kozak\documents\visual studio 2015\Projects\ToDoListApp\ToDoListApp.Core\bin\Debug\ToDoListApp.Core.dll
-c:\users\mateusz.kozak\documents\visual studio 2015\Projects\ToDoListApp\ToDoListApp.Core\bin\Debug\ToDoListApp.Core.pdb
-c:\users\mateusz.kozak\documents\visual studio 2015\Projects\ToDoListApp\ToDoListApp.Core\obj\Debug\ToDoListApp.Core.csprojResolveAssemblyReference.cache
-c:\users\mateusz.kozak\documents\visual studio 2015\Projects\ToDoListApp\ToDoListApp.Core\obj\Debug\ToDoListApp.Core.dll
-c:\users\mateusz.kozak\documents\visual studio 2015\Projects\ToDoListApp\ToDoListApp.Core\obj\Debug\ToDoListApp.Core.pdb
