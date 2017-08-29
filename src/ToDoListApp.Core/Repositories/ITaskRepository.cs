@@ -10,7 +10,7 @@ namespace ToDoListApp.Core.Repositories
 
         Task<Domain.Task> GetAsync(Guid id);
 
-        Task<Domain.Task> GetByOwnerAsync(Guid owner);
+        Task<IEnumerable<Domain.Task>> GetByOwnerAsync(Guid owner);
 
         Task DeleteAsync(Guid id);
 
