@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using ToDoListApp.Infrastructure.Commands.Interfaces;
+using ToDoListApp.Infrastructure.Commands.Tasks;
 using ToDoListApp.Infrastructure.Dto;
 using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
 {
-  public class ToDoController : ApiController
+  public class ToDoController : ApiControllerBase
   {
     private readonly ITaskService _taskService;
 
-    public ToDoController(ITaskService taskService)
+    public ToDoController(ICommandDispatcher commandDispatcher, ITaskService taskService) : base(commandDispatcher)
     {
       _taskService = taskService;
     }  
 
     [HttpGet]
     [ActionName("getbyid")]
-    public async Task<TaskDto> Get(Guid id)
+    public async Task<IHttpActionResult> Get(Guid id)
     {
-      return await _taskService.GetAsync(id);
+      var data = await _taskService.GetAsync(id);
+      if (data == null) NotFound();     
+      return Json(data);
     }
 
     [HttpGet]
@@ -28,8 +33,8 @@ namespace ToDoListApp.Web.Controllers
     public async Task<IHttpActionResult> GetAll()
     {
       var data = await _taskService.GetAllAsync();
-
-      return Ok(data);
+      if(data != null) NotFound();    
+      return Json(data);
     }
 
     [HttpGet]
@@ -37,29 +42,31 @@ namespace ToDoListApp.Web.Controllers
     public async Task<IHttpActionResult> GetByOwner(Guid owner)
     {
       var data = await _taskService.GetByOwnerAsync(owner);
-      return Ok(data);
+      if (data != null) NotFound();
+      return Json(data);
     }
 
     [HttpPost]
     [ActionName("add")]
-    public async Task<IHttpActionResult> Add(string title, string description, DateTime term, Guid owner)
+    public async Task<IHttpActionResult> Add([FromBody]CreateTask command)
     {
-      await _taskService.AddAsync(title, description, term, owner);
+      await DispatchAsync(command);
       return Ok();
     }
 
     [HttpPost]
     [ActionName("update")]
-    public async Task Update(Guid id, string title, string description, DateTime term, bool isDone)
+    public async Task<IHttpActionResult> Update([FromBody]UpdateTask command)
     {
-      await _taskService.UpdateAsync(id, title, description, term, isDone);
+      await DispatchAsync(command);
+      return Ok();
     }
 
     [HttpPost]
     [ActionName("remove")]
-    public async Task Remove(Guid id)
+    public async Task Remove([FromBody]RemoveTask command)
     {
-      await _taskService.RemoveAsync(id);
+      await DispatchAsync(command);
     }
   }
 }
