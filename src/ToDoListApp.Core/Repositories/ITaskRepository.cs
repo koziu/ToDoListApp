@@ -16,6 +16,6 @@ namespace ToDoListApp.Core.Repositories
 
         Task CreateAsync(Domain.Task task);
 
-        Task UpdateAsync(Domain.Task task);
+        Task UpdateAsync(Guid id, string title, string description, DateTime term, bool isDon);
     }
 }

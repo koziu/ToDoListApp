@@ -53,15 +53,24 @@ namespace ToDoListApp.Infrastructure.Repositories
       }
     }
 
-    public async Task UpdateAsync(Core.Domain.Task task)
+    public async Task UpdateAsync(Guid id, string title, string description, DateTime term, bool isDone)
     {
       try
       {
-        var toUpdateTask = await _context.Task.FindAsync(task.Id);
+        var toUpdateTask = await _context.Task.FindAsync(id);
+        toUpdateTask.Title = title;
+        toUpdateTask.Description = description;
+        toUpdateTask.Term = term;
+        toUpdateTask.IsDone = isDone;
+
         if (toUpdateTask != null)
         {
-          var updatedTask = _mapper.Map<Core.Domain.Task, TaskDbModel>(task);
-          _context.Entry(toUpdateTask).CurrentValues.SetValues(updatedTask);
+          _context.Task.Attach(toUpdateTask);
+          _context.Entry(toUpdateTask).Property(p => p.Title).IsModified = true;
+          _context.Entry(toUpdateTask).Property(p => p.Description).IsModified = true;
+          _context.Entry(toUpdateTask).Property(p => p.Term).IsModified = true; 
+          _context.Entry(toUpdateTask).Property(p => p.IsDone).IsModified = true; 
+
           await _context.SaveChangesAsync();
         }
       }

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace ToDoListApp.Web
@@ -11,13 +12,14 @@ namespace ToDoListApp.Web
 
       // Web API routes
       config.MapHttpAttributeRoutes();
-      config.Formatters.JsonFormatter.SerializerSettings.Formatting =
-        Newtonsoft.Json.Formatting.Indented;
+
+      var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+      config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
       config.Routes.MapHttpRoute(
         "DefaultApi",
-        "api/{controller}/{id}",
-        new {controller = "todolist", id = RouteParameter.Optional}
+        "api/{controller}/{action}/{id}",
+        new {controller = "ToDoController", id = RouteParameter.Optional}
       );
     }
   }

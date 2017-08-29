@@ -7,25 +7,59 @@ using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
 {
-  public class ToDoListController : ApiController
+  public class ToDoController : ApiController
   {
     private readonly ITaskService _taskService;
 
-    public ToDoListController(ITaskService taskService)
+    public ToDoController(ITaskService taskService)
     {
       _taskService = taskService;
+    }  
+
+    [HttpGet]
+    [ActionName("getbyid")]
+    public async Task<TaskDto> Get(Guid id)
+    {
+      return await _taskService.GetAsync(id);
     }
 
-    public IEnumerable<string> Get()
+    [HttpGet]
+    [ActionName("getall")]
+    public async Task<IHttpActionResult> GetAll()
     {
-      return new string[] { "value1", "value2" };
+      var data = await _taskService.GetAllAsync();
+
+      return Ok(data);
     }
 
     [HttpGet]
     [ActionName("getbyowner")]
-    public async Task<IEnumerable<TaskDto>> GetByOwnerAsync(Guid owner)
+    public async Task<IHttpActionResult> GetByOwner(Guid owner)
     {
-      return await _taskService.GetByOwnerAsync(owner);
+      var data = await _taskService.GetByOwnerAsync(owner);
+      return Ok(data);
+    }
+
+    [HttpPost]
+    [ActionName("add")]
+    public async Task<IHttpActionResult> Add(string title, string description, DateTime term, Guid owner)
+    {
+      await _taskService.AddAsync(title, description, term, owner);
+      return Ok();
+    }
+
+    [HttpPost]
+    [ActionName("update")]
+    public async Task Update(Guid id, string title, string description, DateTime term, bool isDone)
+    {
+      await _taskService.UpdateAsync(id, title, description, term, isDone);
+    }
+
+    [HttpPost]
+    [ActionName("remove")]
+    public async Task Remove(Guid id)
+    {
+      await _taskService.RemoveAsync(id);
     }
   }
 }
