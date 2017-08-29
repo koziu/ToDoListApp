@@ -13,6 +13,7 @@ namespace ToDoListApp.Infrastructure.Mappers
        config.CreateMap<Task, TaskDto>();
        config.CreateMap<TaskDbModel, Task>();
        config.CreateMap<Task, TaskDbModel>();
+       config.CreateMap<User, UserDto>();
      }).CreateMapper();
   }
 }

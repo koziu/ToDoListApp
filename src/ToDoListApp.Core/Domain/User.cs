@@ -5,21 +5,17 @@ namespace ToDoListApp.Core.Domain
   public class User
   {
     public Guid Id { get; set; }
-    public string Name { get; protected set; }
-    public string Surname { get; protected set; }
+    public string Login { get; protected set; }
     public string Email { get; protected set; }
     public string Password { get; protected set; }
-    public string Salt { get; protected set; }
 
 
-    public User(string name, string surname, string email, string password, string salt)
+    public User(string login, string email, string password)
     {
       Id = Guid.NewGuid();
-      SetName(name);
-      SetSurname(surname);
+      SetLogin(login);
       SetEmail(email);
       Password = password;
-      Salt = salt;
     }
 
     public void SetEmail(string email)
@@ -27,14 +23,9 @@ namespace ToDoListApp.Core.Domain
       Email = email;
     }
 
-    public void SetSurname(string surname)
+    public void SetLogin(string name)
     {
-      Surname = surname;
-    }
-
-    public void SetName(string name)
-    {
-      Name = name;
+      Login = name;
     }
   }
 }

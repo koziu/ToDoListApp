@@ -68,8 +68,8 @@ namespace ToDoListApp.Infrastructure.Repositories
           _context.Task.Attach(toUpdateTask);
           _context.Entry(toUpdateTask).Property(p => p.Title).IsModified = true;
           _context.Entry(toUpdateTask).Property(p => p.Description).IsModified = true;
-          _context.Entry(toUpdateTask).Property(p => p.Term).IsModified = true; 
-          _context.Entry(toUpdateTask).Property(p => p.IsDone).IsModified = true; 
+          _context.Entry(toUpdateTask).Property(p => p.Term).IsModified = true;
+          _context.Entry(toUpdateTask).Property(p => p.IsDone).IsModified = true;
 
           await _context.SaveChangesAsync();
         }

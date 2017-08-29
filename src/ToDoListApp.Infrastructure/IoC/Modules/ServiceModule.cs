@@ -18,10 +18,6 @@ namespace ToDoListApp.Infrastructure.IoC.Modules
         .Where(x => x.IsAssignableTo<IService>())
         .AsImplementedInterfaces()
         .InstancePerLifetimeScope();
-
-      builder.RegisterType<Encrypter>()
-        .As<IEncrypter>()
-        .SingleInstance();
     }
   }
 }

@@ -19,7 +19,7 @@ namespace ToDoListApp.Web
       config.Routes.MapHttpRoute(
         "DefaultApi",
         "api/{controller}/{action}/{id}",
-        new {controller = "ToDoController", id = RouteParameter.Optional}
+        new {controller = "ToDo", id = RouteParameter.Optional}
       );      
     }
 
