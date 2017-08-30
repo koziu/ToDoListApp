@@ -22,8 +22,6 @@ namespace ToDoListApp.Web
     public static void Configuration(IAppBuilder app)
     {
       var config = new HttpConfiguration();
-      WebApiConfig.Register(config);
-      GlobalConfiguration.Configure(WebApiConfig.Register);
       var builder = new ContainerBuilder();
       builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
       builder.RegisterWebApiFilterProvider(config);
@@ -31,12 +29,13 @@ namespace ToDoListApp.Web
       builder.RegisterModule(new ContainerModule());
       builder.RegisterType<ToDoListDbContext>();
       var container = builder.Build();
-      config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-      app.UseWebApi(config);
-      //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
       var authService = container.Resolve<IAuthService>();
-      ConfigureOAuth(app, authService);
 
+      ConfigureOAuth(app, authService);     
+      WebApiConfig.Register(config);
+      GlobalConfiguration.Configure(WebApiConfig.Register);
+      config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+      app.UseWebApi(config);       
     }
 
     public static void ConfigureOAuth(IAppBuilder app, IAuthService authService)

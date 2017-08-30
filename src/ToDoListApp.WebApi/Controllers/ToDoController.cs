@@ -10,6 +10,8 @@ using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
 {
+  [Authorize]
+  [RoutePrefix("api/todo")]
   public class ToDoController : ApiControllerBase
   {
     private readonly ITaskService _taskService;
@@ -20,7 +22,8 @@ namespace ToDoListApp.Web.Controllers
     }  
 
     [HttpGet]
-    [ActionName("getbyid")]
+    [Route("get")]
+    //[ActionName("getbyid")]   
     public async Task<IHttpActionResult> Get(Guid id)
     {
       var data = await _taskService.GetAsync(id);
@@ -29,7 +32,7 @@ namespace ToDoListApp.Web.Controllers
     }
 
     [HttpGet]
-    [ActionName("getall")]
+    [Route("getall")]    
     public async Task<IHttpActionResult> GetAll()
     {
       var data = await _taskService.GetAllAsync();
@@ -38,7 +41,7 @@ namespace ToDoListApp.Web.Controllers
     }
 
     [HttpGet]
-    [ActionName("getbyowner")]
+    [Route("getbyowner")]
     public async Task<IHttpActionResult> GetByOwner(Guid owner)
     {
       var data = await _taskService.GetByOwnerAsync(owner);
@@ -47,7 +50,7 @@ namespace ToDoListApp.Web.Controllers
     }
 
     [HttpPost]
-    [ActionName("add")]
+    [Route("add")]
     public async Task<IHttpActionResult> Add([FromBody]CreateTask command)
     {
       await DispatchAsync(command);
@@ -55,7 +58,7 @@ namespace ToDoListApp.Web.Controllers
     }
 
     [HttpPost]
-    [ActionName("update")]
+    [Route("update")]
     public async Task<IHttpActionResult> Update([FromBody]UpdateTask command)
     {
       await DispatchAsync(command);
@@ -63,7 +66,7 @@ namespace ToDoListApp.Web.Controllers
     }
 
     [HttpPost]
-    [ActionName("remove")]
+    [Route("remove")]
     public async Task Remove([FromBody]RemoveTask command)
     {
       await DispatchAsync(command);
