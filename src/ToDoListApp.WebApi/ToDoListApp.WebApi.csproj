@@ -187,7 +187,6 @@
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Models\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AuthServerProvider.cs" />
     <Compile Include="Startup.cs" />

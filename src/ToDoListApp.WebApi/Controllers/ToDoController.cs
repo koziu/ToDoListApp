@@ -10,7 +10,7 @@ using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
 {
-  [Authorize]
+  //[Authorize]
   [RoutePrefix("api/todo")]
   public class ToDoController : ApiControllerBase
   {
@@ -23,7 +23,6 @@ namespace ToDoListApp.Web.Controllers
 
     [HttpGet]
     [Route("get")]
-    //[ActionName("getbyid")]   
     public async Task<IHttpActionResult> Get(Guid id)
     {
       var data = await _taskService.GetAsync(id);
