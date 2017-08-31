@@ -96,16 +96,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\logo.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
+    <Content Include="src\app\login\login.component.html" />
     <Content Include="src\assets\.gitkeep" />
+    <Content Include="src\systemjs.config.js" />
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
+    <Content Include="src\app\home\home.component.html" />
+    <TypeScriptCompile Include="src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="src\app\home\index.ts" />
+    <TypeScriptCompile Include="src\app\login\index.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\models\task.ts" />
+    <TypeScriptCompile Include="src\app\services\task.service.ts" />
+    <TypeScriptCompile Include="src\app\app.routing.ts" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -130,11 +141,15 @@
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="src\app\guards\index.ts" />
+    <TypeScriptCompile Include="src\app\models\index.ts" />
+    <TypeScriptCompile Include="src\app\models\user.ts" />
+    <TypeScriptCompile Include="src\app\services\authentication.service.ts" />
+    <TypeScriptCompile Include="src\app\services\index.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\polyfills.ts" />
-    <TypeScriptCompile Include="src\test.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>

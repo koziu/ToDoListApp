@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ToDoListApp.Infrastructure.Commands.Interfaces;
 using ToDoListApp.Infrastructure.Commands.Tasks;
 using ToDoListApp.Infrastructure.Dto;
@@ -10,7 +11,6 @@ using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
 {
-  //[Authorize]
   [RoutePrefix("api/todo")]
   public class ToDoController : ApiControllerBase
   {
@@ -21,7 +21,7 @@ namespace ToDoListApp.Web.Controllers
       _taskService = taskService;
     }  
 
-    [HttpGet]
+    [HttpOptions]
     [Route("get")]
     public async Task<IHttpActionResult> Get(Guid id)
     {
@@ -30,7 +30,7 @@ namespace ToDoListApp.Web.Controllers
       return Json(data);
     }
 
-    [HttpGet]
+    [HttpOptions]
     [Route("getall")]    
     public async Task<IHttpActionResult> GetAll()
     {
@@ -39,7 +39,7 @@ namespace ToDoListApp.Web.Controllers
       return Json(data);
     }
 
-    [HttpGet]
+    [HttpOptions]
     [Route("getbyowner")]
     public async Task<IHttpActionResult> GetByOwner(Guid owner)
     {

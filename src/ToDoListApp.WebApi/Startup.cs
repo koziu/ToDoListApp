@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using ToDoListApp.Infrastructure.DbContext;
@@ -21,6 +23,7 @@ namespace ToDoListApp.Web
   {
     public static void Configuration(IAppBuilder app)
     {
+      //app.UseCors(CorsOptions.AllowAll);
       var config = new HttpConfiguration();
       var builder = new ContainerBuilder();
       builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
@@ -29,13 +32,13 @@ namespace ToDoListApp.Web
       builder.RegisterModule(new ContainerModule());
       builder.RegisterType<ToDoListDbContext>();
       var container = builder.Build();
+      app.UseWebApi(config);
       var authService = container.Resolve<IAuthService>();
-
       ConfigureOAuth(app, authService);     
       WebApiConfig.Register(config);
       GlobalConfiguration.Configure(WebApiConfig.Register);
       config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-      app.UseWebApi(config);       
+     
     }
 
     public static void ConfigureOAuth(IAppBuilder app, IAuthService authService)

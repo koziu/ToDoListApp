@@ -1,23 +1,32 @@
+import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DataTablesModule  } from 'angular-datatables';
-import { AppComponent } from './app.component';
+import { AppComponent }  from './app.component';
+import { routing }        from './app.routing';
+import { AuthGuard } from './guards/index';
+import { AuthenticationService, TaskService } from './services/index';
+import { LoginComponent } from './login/index';
+import { HomeComponent } from './home/index';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule,
-    DataTablesModule
+    routing
   ],
-  providers: [],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent
+  ],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    TaskService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

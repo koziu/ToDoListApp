@@ -23,5 +23,12 @@ namespace ToDoListApp.Web.Controllers
       await DispatchAsync(command);
       return Ok();
     }
+
+    public async Task<IHttpActionResult> Login(string login, string password)
+    {
+      var result = await _authService.GetAsync(login, password);
+      if (result == null) NotFound();
+      return Ok();
+    }
   }
 }

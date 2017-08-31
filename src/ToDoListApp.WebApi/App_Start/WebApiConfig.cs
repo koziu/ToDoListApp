@@ -9,7 +9,7 @@ namespace ToDoListApp.Web
     public static void Register(HttpConfiguration config)
     {
       // Web API configuration and services
-      EnableCrossSiteRequests(config);
+     // EnableCrossSiteRequests(config);
       // Web API routes
       config.MapHttpAttributeRoutes();
 
