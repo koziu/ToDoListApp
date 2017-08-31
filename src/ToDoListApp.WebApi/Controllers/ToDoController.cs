@@ -10,7 +10,7 @@ using ToDoListApp.Infrastructure.Dto;
 using ToDoListApp.Infrastructure.Services.Interfaces;
 
 namespace ToDoListApp.Web.Controllers
-{
+{  
   [RoutePrefix("api/todo")]
   public class ToDoController : ApiControllerBase
   {
@@ -21,7 +21,7 @@ namespace ToDoListApp.Web.Controllers
       _taskService = taskService;
     }  
 
-    [HttpOptions]
+    [HttpGet]
     [Route("get")]
     public async Task<IHttpActionResult> Get(Guid id)
     {
@@ -30,7 +30,7 @@ namespace ToDoListApp.Web.Controllers
       return Json(data);
     }
 
-    [HttpOptions]
+    [HttpGet]
     [Route("getall")]    
     public async Task<IHttpActionResult> GetAll()
     {
@@ -39,7 +39,7 @@ namespace ToDoListApp.Web.Controllers
       return Json(data);
     }
 
-    [HttpOptions]
+    [HttpGet]
     [Route("getbyowner")]
     public async Task<IHttpActionResult> GetByOwner(Guid owner)
     {
